@@ -13,4 +13,5 @@ module.exports = {
   singleQuote: true, // uso de comillas simples obligatorio
   useTabs: false, // Espacios de identación no son de tipo tab.
   trailingComma: 'all', // Agregar una coma al definir la última propiedad de un arreglo.
+  bracketSpacing: true, // Imprime espacios entre corchetes en literales de objetos.
 };

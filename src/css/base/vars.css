@@ -1,0 +1,14 @@
+@import "@css/base/fonts.css";
+/* Custom properties */
+:root {
+  --color-01: black;
+  --color-02: #5a6560;
+  --color-03: #9d9d9d;
+  --color-04: #ddd;
+  --color-05: #eee;
+  --color-back: white;
+
+  /* Tipografía */
+  --font-01: "Roboto", sans-serif;
+  --font-02: "Oswald", serif;
+}

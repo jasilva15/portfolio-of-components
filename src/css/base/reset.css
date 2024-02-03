@@ -1,0 +1,133 @@
+@import "@css/base/vars.css";
+
+/* Reset margins and paddings */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  vertical-align: baseline;
+}
+
+/* Evitar problemas con las imágenes */
+img,
+picture,
+video,
+iframe,
+figure {
+  max-width: 100%;
+  width: 100%;
+  display: block;
+  /* opcional */
+  /* object-fit: cover; */
+  object-fit: contain;
+  /* opcional */
+  object-position: center center;
+}
+
+/* Reseteamos los enlaces para funcionar como cajas */
+a {
+  display: block;
+}
+/* Hacemos exepción de los enlaces que se encuentran dentro de párrafos */
+p a {
+  display: inline;
+}
+
+/* Quitamos las viñetas y números en todas las listas */
+ul {
+  list-style-type: none;
+}
+
+/* Configuramos anclas o desplazamientos suaves */
+html {
+  scroll-behavior: smooth; /* Anclas de desplazamientos suaves */
+  scrollbar-gutter: stable; /* Reserva espacio de la barra de desplazamiento */
+}
+
+/* Desactivamos estilos por defecto de las etiquetas principales de texto */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+strong,
+blockquote,
+i,
+b,
+u,
+em {
+  font-size: 1em;
+  font-weight: inherit;
+  font-style: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Evitamos problemas con los pseudoelementos de quotes */
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+/* Configuramos la apariencia del texto que seleccionamos */
+::selection {
+  background-color: var(--color-01);
+  color: var(--color-back);
+}
+
+/* Nivelamos problemas de tipografías y colocación de formularios */
+form,
+input,
+textarea,
+select,
+button,
+label {
+  font-family: inherit;
+  font-size: inherit;
+  hyphens: auto; /* Si no cabe el texto en una linea, coloca un - y pasa hacia abajo */
+  background-color: transparent;
+  display: block;
+  color: inherit;
+  /* opcional */ /* appearance: none; */
+}
+
+/* Reseteamos las tablas */
+table,
+tr,
+td {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Evitamos problemas con los SVG */
+svg {
+  width: 100%;
+  display: block;
+  //fill: currentColor;
+}
+
+/* Configuramos la tipografía para toda la web */
+body {
+  min-height: 100vh;
+  font-size: 100%;
+  font-family: var(--font-01);
+  color: var(--color-02);
+  background-color: var(--color-back);
+  /* opcional */
+  /* line-height: 1.4em; */
+  /* opcional */ /* hyphens: auto; */
+  /* opcional */
+  font-smooth: always;
+  /* opcional */
+  -webkit-font-smoothing: antialiased;
+  /* opcional */
+  -moz-osx-font-smoothing: grayscale;
+}
