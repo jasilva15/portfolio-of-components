@@ -1,6 +1,6 @@
 ---
-import Header from '@components/base/Header.astro';
-import Footer from '@components/base/Footer.astro';
+import Header from '@/components/base/Header.astro';
+import Footer from '@/components/base/Footer.astro';
 interface Props {
   title?: string;
   description?: string;
@@ -31,5 +31,5 @@ const { title = 'Portfolio', description = 'Portafolios de José Silva' } =
 </html>
 
 <style is:global>
-  @import '@css/main.css';
+  @import '@/css/main.css';
 </style>

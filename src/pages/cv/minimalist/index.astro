@@ -1,0 +1,35 @@
+---
+import Layout from '@/layouts/cv/minimalist/Layout.astro';
+
+import About from '@/components/cv/minimalist/sections/About.astro';
+import Education from '@/components/cv/minimalist/sections/Education.astro';
+import Experience from '@/components/cv/minimalist/sections/Experience.astro';
+import Hero from '@/components/cv/minimalist/sections/Hero.astro';
+import Projects from '@/components/cv/minimalist/sections/Projects.astro';
+import Skills from '@/components/cv/minimalist/sections/Skills.astro';
+import KeyboardManager from '@/components/cv/minimalist/KeyboardManager.astro';
+
+import { basics } from '@cv';
+const { name, label } = basics;
+---
+
+<Layout title=`Portafolio de ${name} - ${label}`>
+  <main>
+    <Hero />
+    <About />
+    <Experience />
+    <!-- <Education /> -->
+    <Projects />
+    <Skills />
+  </main>
+
+  <KeyboardManager />
+</Layout>
+
+<style>
+  main {
+    padding: 4rem;
+    margin: auto;
+    width: 100%;
+  }
+</style>

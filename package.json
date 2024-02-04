@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.4.1",
-    "astro": "^4.3.2"
+    "astro": "^4.3.2",
+    "ninja-keys": "^1.2.2"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^6.20.0",

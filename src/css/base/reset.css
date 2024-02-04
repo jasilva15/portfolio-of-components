@@ -1,4 +1,4 @@
-@import "@css/base/vars.css";
+@import '@/css/base/vars.css';
 
 /* Reset margins and paddings */
 * {
@@ -73,7 +73,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
+  content: '';
   content: none;
 }
 
