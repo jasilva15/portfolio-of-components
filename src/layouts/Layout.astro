@@ -1,17 +1,16 @@
 ---
-import Container from '@components/base/Container.astro';
-
+import Header from '@components/base/Header.astro';
+import Footer from '@components/base/Footer.astro';
 interface Props {
   title?: string;
   description?: string;
 }
 
-const { 
-  title = 'Portfolio', 
-  description = 'Portafolios de José Silva' 
-} = Astro.props;
+const { title = 'Portfolio', description = 'Portafolios de José Silva' } =
+  Astro.props;
 ---
 
+<!doctype html>
 <html lang="es-mx">
   <head>
     <meta charset="utf-8" />
@@ -21,13 +20,13 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
   </head>
+
   <body>
-    <Container>
-      <h1>Astro</h1>
-      <main>
-        <slot />
-      </main>
-    </Container>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>
 

@@ -1,0 +1,33 @@
+<footer class="footer">
+  <p class="footer__title">Footer</p>
+  <p class="footer__text">
+    Copyright © {new Date().getFullYear()}. Marca Personal.
+  </p>
+</footer>
+
+<style>
+  @custom-media --md (min-width: 768px);
+
+  .footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--color-01);
+    color: var(--color-back);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    @media (--md) {
+      height: 120px;
+    }
+
+    &__title {
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    &__text {
+      font-size: 1rem;
+      line-height: 1.25rem;
+    }
+  }
+</style>

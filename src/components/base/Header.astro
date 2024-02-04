@@ -1,0 +1,190 @@
+---
+import Container from '@components/base/Container.astro';
+
+const menuItems = [
+  {
+    title: 'Inicio',
+    path: '/',
+  },
+  {
+    title: 'Documentos',
+    path: '/#documentos',
+  },
+];
+---
+
+<script is:inline>
+  const openMenu = () => {
+    const menu = document.getElementById('menu');
+    const bars = document.getElementById('bars');
+
+    menu.classList.contains('hide')
+      ? menu.classList.remove('hide')
+      : menu.classList.add('hide');
+
+    if (bars.classList.contains('active')) {
+      bars.classList.remove('active');
+    } else {
+      bars.classList.add('active');
+    }
+  };
+</script>
+
+<Container>
+  <header class="header">
+    <div class="header__logosbars">
+      <div class="header__logos">Logo</div>
+
+      <div id="bars" class="header__bars" onclick="openMenu()">
+        <span id="bar-top"></span>
+        <span id="bar-center"></span>
+        <span id="bar-bottom"></span>
+      </div>
+    </div>
+    <nav id="menu" class="header__navbar hide">
+      <ul class="header__menu">
+        {
+          menuItems.map((item) => (
+            <li>
+              <a class="header__link" href={item.path} onclick="openMenu()">
+                {item.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </header>
+</Container>
+
+<style>
+  @custom-media --md (min-width: 768px);
+  @custom-media --lg (min-width: 1024px);
+
+  .active {
+    #bar-top {
+      transform: translateY(8px) rotateZ(45deg) translateZ(0px);
+    }
+    #bar-center {
+      opacity: 0;
+    }
+    #bar-bottom {
+      width: 2rem !important;
+      transform: translateY(-8px) rotateZ(-45deg) translateZ(0px);
+    }
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding: 0.75rem 0;
+    height: 100px;
+
+    @media (--lg) {
+      flex-direction: row;
+    }
+
+    &__logosbars {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+
+      @media (--lg) {
+        width: auto;
+      }
+    }
+    &__logos {
+      display: flex;
+      gap: 0.5rem;
+    }
+    &__logo {
+      width: auto;
+      height: 70px;
+      @media (--md) {
+        height: 80px;
+      }
+    }
+    &__bars {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 2rem;
+      height: 1.5rem;
+      cursor: pointer;
+
+      @media (--lg) {
+        display: none;
+      }
+
+      span {
+        height: 2px;
+        background-color: var(--color-01);
+        transition:
+          0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6),
+          opacity 0.3s ease;
+      }
+
+      #bar-top {
+        width: 2rem;
+      }
+      #bar-center {
+        width: 1.5rem;
+      }
+      #bar-bottom {
+        width: 1rem;
+      }
+    }
+
+    &__navbar {
+      width: 100%;
+      margin-top: 0.5rem;
+
+      @media (--lg) {
+        display: flex;
+        width: auto;
+        margin-top: 0px;
+      }
+    }
+    &__menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      border: 1px solid;
+      border-radius: 3px;
+      background: white;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+
+      @media (--lg) {
+        flex-direction: row;
+        align-items: initial;
+        gap: 1.5rem;
+        border: none;
+        background: none;
+        padding: initial;
+      }
+      /* & li {
+        display: flex;
+        width: 100%;
+        padding: 0 0.5rem;
+        justify-content: center;
+        &:hover {
+          background-color: var(--color-05);
+        }
+      } */
+    }
+
+    &__link {
+      display: flex;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      &:hover {
+        color: var(--color-01);
+      }
+    }
+  }
+</style>
