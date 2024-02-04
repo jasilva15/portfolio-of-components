@@ -1,5 +1,5 @@
 ---
-import Container from '@components/base/Container.astro';
+import Container from '@/components/base/Container.astro';
 
 const menuItems = [
   {
@@ -22,11 +22,9 @@ const menuItems = [
       ? menu.classList.remove('hide')
       : menu.classList.add('hide');
 
-    if (bars.classList.contains('active')) {
-      bars.classList.remove('active');
-    } else {
-      bars.classList.add('active');
-    }
+    bars.classList.contains('active')
+      ? bars.classList.remove('active')
+      : bars.classList.add('active');
   };
 </script>
 
