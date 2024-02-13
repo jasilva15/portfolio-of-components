@@ -1,5 +1,11 @@
 ---
-import Layout from '@/layouts/slider/effectMagic/Layout.astro';
+import Layout from '@/layouts/Layout.astro';
+import notas from '@/data/slider/effectMagic/notas.json';
+import { truncateString } from '@/js/functios.js';
+
+const jsonNotasCopy = JSON.parse(JSON.stringify(notas));
+const firtElement = jsonNotasCopy.shift();
+jsonNotasCopy.push(firtElement);
 ---
 
 <Layout title="Slider con Efecto Mágico">
@@ -14,217 +20,65 @@ import Layout from '@/layouts/slider/effectMagic/Layout.astro';
 
     <div class="carousel">
       <div class="carousel-list">
-        <div class="carousel-list__item">
-          <img
-            class="carousel-list__img"
-            src="/slider/effectMagic/img1.webp"
-            alt="imagen 1"
-          />
-          <div class="carousel-list__content">
-            <div class="carousel-list__author">LUNDEV</div>
-            <div class="carousel-list__title">DESIGN SLIDER</div>
-            <div class="carousel-list__topic">ANIMAL</div>
-            <div class="carousel-list__des">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Perspiciatis itaque tempora rem iusto quaerat necessitatibus odit
-              dolorum ea cum illo nihil adipisci error et, eos cumque illum
-              veniam distinctio placeat.
+        {
+          notas.map(({ type, title, image, description, url }) => (
+            <div class="carousel-list__item">
+              <img class="carousel-list__img" src={image} alt={title} />
+              <div class="carousel-list__content">
+                <div class="carousel-list__author">{type}</div>
+                <div class="carousel-list__title">{title}</div>
+                <div class="carousel-list__des">{description}</div>
+                <div class="carousel-list__buttons">
+                  <button>Ver Nota</button>
+                </div>
+              </div>
             </div>
-            <div class="carousel-list__buttons">
-              <button>SEE MORE</button>
-              <button>SUBCRIBE</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-list__item">
-          <img
-            class="carousel-list__img"
-            src="/slider/effectMagic/img2.webp"
-            alt="imagen 2"
-          />
-          <div class="carousel-list__content">
-            <div class="carousel-list__author">LUNDEV</div>
-            <div class="carousel-list__title">DESIGN SLIDER</div>
-            <div class="carousel-list__topic">ANIMAL</div>
-            <div class="carousel-list__des">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Perspiciatis itaque tempora rem iusto quaerat necessitatibus odit
-              dolorum ea cum illo nihil adipisci error et, eos cumque illum
-              veniam distinctio placeat.
-            </div>
-            <div class="carousel-list__buttons">
-              <button>SEE MORE</button>
-              <button>SUBCRIBE</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-list__item">
-          <img
-            class="carousel-list__img"
-            src="/slider/effectMagic/img3.webp"
-            alt="imagen 3"
-          />
-          <div class="carousel-list__content">
-            <div class="carousel-list__author">LUNDEV</div>
-            <div class="carousel-list__title">DESIGN SLIDER</div>
-            <div class="carousel-list__topic">ANIMAL</div>
-            <div class="carousel-list__des">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Perspiciatis itaque tempora rem iusto quaerat necessitatibus odit
-              dolorum ea cum illo nihil adipisci error et, eos cumque illum
-              veniam distinctio placeat.
-            </div>
-            <div class="carousel-list__buttons">
-              <button>SEE MORE</button>
-              <button>SUBCRIBE</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-list__item">
-          <img
-            class="carousel-list__img"
-            src="/slider/effectMagic/img4.webp"
-            alt="imagen 4"
-          />
-          <div class="carousel-list__content">
-            <div class="carousel-list__author">LUNDEV</div>
-            <div class="carousel-list__title">DESIGN SLIDER</div>
-            <div class="carousel-list__topic">ANIMAL</div>
-            <div class="carousel-list__des">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Perspiciatis itaque tempora rem iusto quaerat necessitatibus odit
-              dolorum ea cum illo nihil adipisci error et, eos cumque illum
-              veniam distinctio placeat.
-            </div>
-            <div class="carousel-list__buttons">
-              <button>SEE MORE</button>
-              <button>SUBCRIBE</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-list__item">
-          <img
-            class="carousel-list__img"
-            src="/slider/effectMagic/img5.webp"
-            alt="imagen 4"
-          />
-          <div class="carousel-list__content">
-            <div class="carousel-list__author">LUNDEV</div>
-            <div class="carousel-list__title">DESIGN SLIDER</div>
-            <div class="carousel-list__topic">ANIMAL</div>
-            <div class="carousel-list__des">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Perspiciatis itaque tempora rem iusto quaerat necessitatibus odit
-              dolorum ea cum illo nihil adipisci error et, eos cumque illum
-              veniam distinctio placeat.
-            </div>
-            <div class="carousel-list__buttons">
-              <button>SEE MORE</button>
-              <button>SUBCRIBE</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-list__item">
-          <img
-            class="carousel-list__img"
-            src="/slider/effectMagic/img6.webp"
-            alt="imagen 4"
-          />
-          <div class="carousel-list__content">
-            <div class="carousel-list__author">LUNDEV</div>
-            <div class="carousel-list__title">DESIGN SLIDER</div>
-            <div class="carousel-list__topic">ANIMAL</div>
-            <div class="carousel-list__des">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Perspiciatis itaque tempora rem iusto quaerat necessitatibus odit
-              dolorum ea cum illo nihil adipisci error et, eos cumque illum
-              veniam distinctio placeat.
-            </div>
-            <div class="carousel-list__buttons">
-              <button>SEE MORE</button>
-              <button>SUBCRIBE</button>
-            </div>
-          </div>
-        </div>
+          ))
+        }
       </div>
 
       <div class="carousel-thumbnail">
-        <div class="carousel-thumbnail__item">
-          <img
-            class="carousel-thumbnail__img"
-            src="/slider/effectMagic/img2.webp"
-            alt="thumbanail img2"
-          />
-          <div class="carousel-thumbnail__content">
-            <div class="carousel-thumbnail__title">Name Slider</div>
-            <div class="carousel-thumbnail__des">Description</div>
-          </div>
-        </div>
-        <div class="carousel-thumbnail__item">
-          <img
-            class="carousel-thumbnail__img"
-            src="/slider/effectMagic/img3.webp"
-            alt="thumbanail img3"
-          />
-          <div class="carousel-thumbnail__content">
-            <div class="carousel-thumbnail__title">Name Slider</div>
-            <div class="carousel-thumbnail__des">Description</div>
-          </div>
-        </div>
-        <div class="carousel-thumbnail__item">
-          <img
-            class="carousel-thumbnail__img"
-            src="/slider/effectMagic/img4.webp"
-            alt="thumbanail img4"
-          />
-          <div class="carousel-thumbnail__content">
-            <div class="carousel-thumbnail__title">Name Slider</div>
-            <div class="carousel-thumbnail__des">Description</div>
-          </div>
-        </div>
-        <div class="carousel-thumbnail__item">
-          <img
-            class="carousel-thumbnail__img"
-            src="/slider/effectMagic/img5.webp"
-            alt="thumbanail img4"
-          />
-          <div class="carousel-thumbnail__content">
-            <div class="carousel-thumbnail__title">Name Slider</div>
-            <div class="carousel-thumbnail__des">Description</div>
-          </div>
-        </div>
-        <div class="carousel-thumbnail__item">
-          <img
-            class="carousel-thumbnail__img"
-            src="/slider/effectMagic/img6.webp"
-            alt="thumbanail img4"
-          />
-          <div class="carousel-thumbnail__content">
-            <div class="carousel-thumbnail__title">Name Slider</div>
-            <div class="carousel-thumbnail__des">Description</div>
-          </div>
-        </div>
-        <div class="carousel-thumbnail__item">
-          <img
-            class="carousel-thumbnail__img"
-            src="/slider/effectMagic/img1.webp"
-            alt="thumbanail img1"
-          />
-          <div class="carousel-thumbnail__content">
-            <div class="carousel-thumbnail__title">Name Slider</div>
-            <div class="carousel-thumbnail__des">Description</div>
-          </div>
-        </div>
+        {
+          jsonNotasCopy.map(({ title, image }) => (
+            <div class="carousel-thumbnail__item">
+              <img class="carousel-thumbnail__img" src={image} alt={title} />
+              <div class="carousel-thumbnail__content">
+                <div class="carousel-thumbnail__title">
+                  {truncateString(title, 50)}
+                </div>
+              </div>
+            </div>
+          ))
+        }
       </div>
 
       <div class="carousel-arrows">
-        <button id="prev"><</button>
-        <button id="next">></button>
+        <button id="prev">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="w-5 h-5"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </button>
+        <button id="next">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="w-5 h-5"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </button>
       </div>
 
       <div class="carousel-time"></div>
@@ -295,6 +149,10 @@ import Layout from '@/layouts/slider/effectMagic/Layout.astro';
     position: relative;
     z-index: 100;
 
+    nav {
+      display: flex;
+    }
+
     &__link {
       text-decoration: none;
       color: #eee;
@@ -337,10 +195,9 @@ import Layout from '@/layouts/slider/effectMagic/Layout.astro';
     pointer-events: none;
   }
 
-  .carousel.next .carousel-time,
-  .carousel.prev .carousel-time {
-    width: 100%;
-    animation: timeRunning 2s linear 1 forwards;
+  .carousel.next > .carousel-time,
+  .carousel.prev > .carousel-time {
+    animation: runningTime 7s linear 1 forwards;
   }
 
   .carousel.prev .carousel-list .carousel-list__item:nth-child(2) {
@@ -411,6 +268,7 @@ import Layout from '@/layouts/slider/effectMagic/Layout.astro';
       width: 100%;
       height: 100%;
       object-fit: cover;
+      filter: brightness(0.5);
     }
 
     &__content {
@@ -433,15 +291,19 @@ import Layout from '@/layouts/slider/effectMagic/Layout.astro';
     &__author {
       font-weight: bold;
       letter-spacing: 10px;
+      background-color: black;
+      padding: 0.05rem 0.5rem;
+      display: inline;
     }
     &__title,
     &__topic {
       font-weight: bold;
-      font-size: 5em;
+      font-size: 2em;
       list-style: 1.3em;
     }
 
     &__title {
+      margin-top: 0.75rem;
       @media (--md) {
         font-size: 30px;
       }
@@ -452,6 +314,12 @@ import Layout from '@/layouts/slider/effectMagic/Layout.astro';
       @media (--md) {
         font-size: 35px;
       }
+    }
+    &__des {
+      font-size: 1rem;
+      font-weight: 400;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
     }
 
     &__buttons {
@@ -502,13 +370,24 @@ import Layout from '@/layouts/slider/effectMagic/Layout.astro';
 
     &__content {
       position: absolute;
-      bottom: 10px;
-      left: 10px;
-      right: 10px;
+      bottom: 0;
+      background-image: linear-gradient(
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0.25),
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+      );
+      display: block;
+      max-width: 150px;
+      padding: 1.5rem 0.5rem 0.5rem 0.5rem;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
     }
 
     &__title {
-      font-weight: 500;
+      font-weight: 400;
+      text-align: center;
+      min-width: calc(150px -1rem);
     }
     &__dec {
       font-weight: 300;
@@ -531,12 +410,12 @@ import Layout from '@/layouts/slider/effectMagic/Layout.astro';
       border-radius: 50%;
       background-color: #eee4;
       border: none;
-      font-family: monospace;
       color: #fff;
-      font-weight: bold;
-      font-size: large;
       transition: 0.5s;
       z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       &:hover {
         background-color: #eee;
@@ -546,11 +425,13 @@ import Layout from '@/layouts/slider/effectMagic/Layout.astro';
   }
 
   .carousel-time {
-    width: 0%;
-    height: 5px;
-    background-color: #f1683a;
     position: absolute;
-    z-index: 100;
+    z-index: 1000;
+    width: 0%;
+    height: 3px;
+    background-color: black;
+    left: 0;
+    top: 0;
   }
 
   @keyframes showContent {
@@ -602,6 +483,15 @@ import Layout from '@/layouts/slider/effectMagic/Layout.astro';
   }
 
   @keyframes timeRunning {
+    to {
+      width: 0;
+    }
+  }
+
+  @keyframes runningTime {
+    from {
+      width: 100%;
+    }
     to {
       width: 0;
     }

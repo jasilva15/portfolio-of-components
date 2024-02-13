@@ -1,0 +1,68 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Container from '@/components/base/Container.astro';
+import { getData } from '@/js/functios';
+
+const dataLegislatura = await getData(
+  'https://congresoqroo.gob.mx/api/v1/legislatura/',
+);
+const legislaturas = [...dataLegislatura];
+legislaturas.sort((a, b) => b.anio_ini - a.anio_ini);
+const legislaturasActivas = legislaturas.filter(
+  (elemento) => elemento.activa === true,
+);
+
+const dataSesiones = await getData(
+  'https://congresoqroo.gob.mx/api/v1/sesiones/?format=json',
+);
+const sesiones = [...dataSesiones];
+const sesionesActivas = sesiones.filter(
+  (sesion) => sesion.periodo.anio.legislatura.activa === true,
+);
+sesionesActivas.sort((a, b) => b.fecha - a.fecha);
+
+const dataPeriodos = await getData(
+  'https://congresoqroo.gob.mx/api/v1/periodos/',
+);
+const periodos = [...dataPeriodos];
+const periodosActivos = periodos.filter(
+  (periodo) => periodo.anio.legislatura.activa === true,
+);
+periodosActivos.sort((a, b) => b.fecha_inicio - a.fecha_inicio);
+
+console.log(periodosActivos);
+---
+
+<Layout>
+  <Container>
+    <h1>Test de Consulta de Legislatura</h1>
+    <div>
+      {
+        legislaturasActivas.length > 0 ? (
+          <pre>
+            {legislaturasActivas[0].id}
+            {legislaturasActivas[0].titulo}
+            {legislaturasActivas[0].anio_ini} -{' '}
+            {legislaturasActivas[0].anio_fin}
+          </pre>
+        ) : (
+          <h1>No hay Legislatura Activa</h1>
+        )
+      }
+    </div>
+
+    <h1>Sesiones</h1>
+    <div>
+      {
+        (
+          <pre>
+            {sesionesActivas[0].id} - {sesionesActivas[0].numeroSesion}
+            {sesionesActivas[0].fecha} - {sesionesActivas[0].sesion}
+            {sesionesActivas[0].periodo.anio.anio}
+            {sesionesActivas[0].periodo.periodo}
+          </pre>
+        )
+      }
+    </div>
+  </Container>
+</Layout>

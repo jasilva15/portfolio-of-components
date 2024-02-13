@@ -1,0 +1,118 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import Container from '@/components/base/Container.astro';
+import APICard from '@/components/others/workwithdata/APICard.tsx';
+
+// DATA METHOD 1: Local Frontmatter Data
+const data1 = ['Chris', 'Jon', 'Jes'];
+
+// DATA METHOD 2: Fetch Remote Data
+type Post = {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+};
+const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+const data2: Post[] = await res.json();
+
+// DATA METHOD 3: Import Local Files
+import data3Json from '@/data/others/workwithdata/data3.json';
+import data3Ts from '@/data/others/workwithdata/data3';
+const data3Glob = await Astro.glob('@/data/others/workwithdata/**/*.md');
+//console.log(data3Glob);
+
+// DATA METHOD 4: Content Collections
+const data4 = await getCollection('product');
+//console.log(data4);
+---
+
+<Layout>
+  <Container>
+    <h1>Opciones para trabajar con datos en Astro</h1>
+    <div class="card-wrapper">
+      <div class="card">
+        <h2>1: Local Frontmatter Data</h2>
+        <ul>
+          {data1.map((i) => <li>{i}</li>)}
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>2: Fetch Remote Data</h2>
+        <ul>
+          {data2.slice(0, 5).map((i) => <li>{i.title}</li>)}
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>3: Import Local Files</h2>
+        <ul>
+          {data3Json.map((i) => <li>{i.name}</li>)}
+        </ul>
+        <ul>
+          {data3Ts.map((i) => <li>{i.name}</li>)}
+        </ul>
+        <!-- <Fragment set:html={data3Glob.map((post) => post.compiledContent())} /> -->
+        <!-- {
+          data3Glob.map((post) => {
+            const Content = post.Content;
+            return <Content />;
+          })
+        } -->
+      </div>
+
+      <div class="card">
+        <h2>4: Content Collections</h2>
+        <ul>
+          {
+            data4.map((i) => (
+              <li>
+                {i.data.name} - {i.data.price}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>5: Create JSON endpoints</h2>
+        <APICard client:load />
+      </div>
+    </div>
+  </Container>
+</Layout>
+
+<style>
+  .card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 1rem;
+    margin-block: 1rem;
+  }
+  .card {
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    max-width: fit-content;
+
+    & h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: black;
+    }
+  }
+  ul {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    place-items: center;
+    gap: 1rem;
+  }
+</style>

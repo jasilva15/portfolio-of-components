@@ -1,5 +1,9 @@
 module.exports = {
-  extends: ['plugin:astro/recommended', 'prettier'],
+  extends: [
+    'plugin:astro/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+  ],
   overrides: [
     {
       // Define the configuration for `.astro` file.
