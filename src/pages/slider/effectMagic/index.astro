@@ -1,11 +1,34 @@
 ---
 import Layout from '@/layouts/slider/effectMagic/Layout.astro';
+import estrados from '@/data/slider/effectMagic/estrados.json';
 import notas from '@/data/slider/effectMagic/notas.json';
 import { truncateString } from '@/js/functios.js';
 
-const jsonNotasCopy = JSON.parse(JSON.stringify(notas));
-const firtElement = jsonNotasCopy.shift();
-jsonNotasCopy.push(firtElement);
+const jsonEstrados = estrados.map((item) => ({
+  tipo: `Estrados - ${item.tipo_doc}`,
+  fecha: item.fecha_pub,
+  titulo: item.descripcion,
+  imagen: '/slider/effectMagic/estrados.webp',
+  descripcion: '',
+  url: item.archivo,
+  textoboton: `Ver ${item.tipo_doc}`,
+}));
+
+const jsonNotas = notas.map((item) => ({
+  tipo: item.type,
+  fecha: item.date,
+  titulo: item.title,
+  imagen: item.image,
+  descripcion: item.description,
+  url: item.url,
+  textoboton: 'Ver Noticia',
+}));
+
+const jsonFinal = jsonEstrados.concat(jsonNotas);
+const jsonFinalminiature = JSON.parse(JSON.stringify(jsonFinal));
+const firtElement = jsonFinalminiature.shift();
+
+jsonFinalminiature.push(firtElement);
 ---
 
 <Layout title="Slider con Efecto Mágico">
@@ -21,30 +44,34 @@ jsonNotasCopy.push(firtElement);
     <div class="carousel">
       <div class="carousel-list">
         {
-          notas.map(({ type, title, image, description, url }) => (
-            <div class="carousel-list__item">
-              <img class="carousel-list__img" src={image} alt={title} />
-              <div class="carousel-list__content">
-                <div class="carousel-list__author">{type}</div>
-                <div class="carousel-list__title">{title}</div>
-                <div class="carousel-list__des">{description}</div>
-                <div class="carousel-list__buttons">
-                  <button>Ver Nota</button>
+          jsonFinal.map(
+            ({ tipo, titulo, imagen, descripcion, url, textoboton }) => (
+              <div class="carousel-list__item">
+                <img class="carousel-list__img" src={imagen} alt={titulo} />
+                <div class="carousel-list__content">
+                  <div class="carousel-list__author">{tipo}</div>
+                  <div class="carousel-list__title">{titulo}</div>
+                  <div class="carousel-list__des">{descripcion}</div>
+                  <div class="carousel-list__buttons">
+                    <a href={url} target="_blank">
+                      {textoboton}
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))
+            ),
+          )
         }
       </div>
 
       <div class="carousel-thumbnail">
         {
-          jsonNotasCopy.map(({ title, image }) => (
+          jsonFinalminiature.map(({ titulo, imagen }) => (
             <div class="carousel-thumbnail__item">
-              <img class="carousel-thumbnail__img" src={image} alt={title} />
+              <img class="carousel-thumbnail__img" src={imagen} alt={titulo} />
               <div class="carousel-thumbnail__content">
                 <div class="carousel-thumbnail__title">
-                  {truncateString(title, 50)}
+                  {truncateString(titulo, 50)}
                 </div>
               </div>
             </div>
@@ -250,16 +277,16 @@ jsonNotasCopy.push(firtElement);
         }
 
         .carousel-list__title {
-          animation-delay: 1.2s;
+          animation-delay: 1s;
         }
         .carousel-list__topic {
-          animation-delay: 1.4s;
+          animation-delay: 1.2s;
         }
         .carousel-list__dec {
-          animation-delay: 1.6s;
+          animation-delay: 1.4s;
         }
         .carousel-list__buttons {
-          animation-delay: 1.8s;
+          animation-delay: 1.5s;
         }
       }
     }
@@ -323,25 +350,21 @@ jsonNotasCopy.push(firtElement);
     }
 
     &__buttons {
-      display: grid;
-      grid-template-columns: repeat(2, 130px);
-      grid-template-rows: 40px;
+      display: flex;
+      //grid-template-columns: repeat(2, 130px);
+      //grid-template-rows: 40px;
       gap: 5px;
       margin-top: 20px;
 
-      button {
+      a {
         border: none;
         background-color: #eee;
         letter-spacing: 3px;
         font-family: Poppins;
         font-weight: 500;
         color: #555;
-
-        &:nth-child(2) {
-          background-color: transparent;
-          color: #eee;
-          border: 1px solid #eee;
-        }
+        padding: 0.5rem 1rem;
+        text-decoration: none;
       }
     }
   }
